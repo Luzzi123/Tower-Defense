@@ -1,5 +1,4 @@
 package enemys;
 
-public class NormalEnemy {
-	
+public class NormalEnemy extends EnemyALG {
 }
