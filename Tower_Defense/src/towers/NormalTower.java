@@ -12,14 +12,15 @@ public class NormalTower extends TowerALG{
 
 	@Override
 	public void lvlUpTo2() {
-		// TODO Auto-generated method stub
-		
+		super.setDmg(25);
+		super.setRangePXL(150);
 	}
 
 	@Override
 	public void lvlUpTo3() {
-		// TODO Auto-generated method stub
-		
+		super.setDmg(50);
+		super.setRangePXL(200);
+		super.setShotdelay(300);
 	}
 	
 }

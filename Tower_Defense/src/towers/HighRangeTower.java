@@ -8,13 +8,15 @@ public class HighRangeTower extends TowerALG {
 
 	@Override
 	public void lvlUpTo2() {
-		// TODO Auto-generated method stub
-		
+		super.setDmg(100);
+		super.setRangePXL(2000);
+		super.setShotdelay(4000);
 	}
 
 	@Override
 	public void lvlUpTo3() {
-		// TODO Auto-generated method stub
-		
+		super.setDmg(150);
+		super.setRangePXL(2500);
+		super.setShotdelay(3000);
 	}
 }
