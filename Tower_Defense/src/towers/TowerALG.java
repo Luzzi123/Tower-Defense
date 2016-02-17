@@ -1,6 +1,6 @@
 package towers;
 
-public class TowerALG {
+public abstract class TowerALG implements TowerInterface{
 	private int dmg;
 	private int rangePXL;
 	private int shotdelay;
@@ -11,14 +11,7 @@ public class TowerALG {
 		setDmg(dmg);
 		setRangePXL(range);
 		setShotdelay(shotdelay);
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 	
@@ -39,33 +32,9 @@ public class TowerALG {
 	private void setRangePXL(int range) {
 		this.rangePXL = range;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 	public int getShotdelay() {
 		return shotdelay;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 	private void setShotdelay(int shotdelay) {
 		this.shotdelay = shotdelay;
 	}

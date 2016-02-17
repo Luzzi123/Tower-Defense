@@ -6,4 +6,16 @@ public class FlameTower extends TowerALG {
 		super(10,50,0);
 	}
 
+	@Override
+	public void lvlUpTo2() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lvlUpTo3() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
