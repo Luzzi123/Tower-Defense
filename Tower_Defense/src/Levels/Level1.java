@@ -1,8 +1,12 @@
 package Levels;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -13,11 +17,11 @@ public class Level1 {
 public static void main(String[] args){          
 	
 		JFrame l1 = new JFrame("Level 1");      
-        l1.setSize(700,750);
-        l1.setLocationRelativeTo(null);
+		l1.setLayout(new BorderLayout());
+		
+		l1.setLocationRelativeTo(null);
        
         JPanel jp = new JPanel();
-        jp.setSize(new Dimension(80,10));
         jp.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.NORTH;
@@ -48,17 +52,20 @@ public static void main(String[] args){
         jp.add(ft,c);
         ft.setPreferredSize(new Dimension(90,75));
         
-        
+        /**
         JProgressBar lb = new JProgressBar(0, 100);
         lb.setValue(50);
 		lb.setStringPainted(true);
-		c.gridx = 1;
-		c.gridy = 3;
+		c.gridx = 6;
+		c.gridy = 6;
 		jp.add(lb,c);
+		*/
 		
-		
+		jp.setBackground(Color.RED);
         		
-        l1.add(jp);
+        l1.add(jp, BorderLayout.NORTH);
+        l1.add(new JButton("dummy"), BorderLayout.CENTER);
+        l1.pack();
         l1.setVisible(true);
         l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
