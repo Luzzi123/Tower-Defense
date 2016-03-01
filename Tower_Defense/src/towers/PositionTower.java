@@ -4,6 +4,7 @@ import java.awt.MouseInfo;
 public class PositionTower {
 	private double y;
 	private double x;
+	
 	public PositionTower(){
 		setY(MouseInfo.getPointerInfo().getLocation().getY());
 		setX(MouseInfo.getPointerInfo().getLocation().getX());
