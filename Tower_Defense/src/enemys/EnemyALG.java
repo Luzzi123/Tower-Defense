@@ -1,26 +1,42 @@
 package enemys;
 
-public class EnemyALG {
+public abstract class EnemyALG {
 	private int hp;
-	private int movespeed;
+	private double movespeed;
+	private double posx;
+	private double posy;
 	
-	public EnemyALG(){
+	public EnemyALG(int hp, double movespeed, double posx, double posy){
 		setHp(hp);
 		setMovespeed(movespeed);
+		setPosx(posx);
+		setPosy(posy);
 	}
 
 	
+	private void setPosy(double posy) {
+		this.posy=posy;
+	}
+	private void setPosx(double posx) {
+		this.posx=posx;
+	}
 	public int getHp() {
 		return hp;
 	}
-	public int getMovespeed() {
+	public double getMovespeed() {
 		return movespeed;
 	}
 	private void setHp(int hp) {
 		this.hp = hp;
 	}
-	private void setMovespeed(int movespeed) {
-		this.movespeed = movespeed;
+	private void setMovespeed(double movespeed2) {
+		this.movespeed = movespeed2;
+	}
+	public double getPosx() {
+		return posx;
+	}
+	public double getPosy() {
+		return posy;
 	}
 	
 	

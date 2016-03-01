@@ -4,7 +4,7 @@ public class TestMousePOS {
 
 	public static void main(String[] args) {
 		
-		Position p= new Position();
+		PositionTower p= new PositionTower();
 		System.out.println(p.toString());
 
 	}

@@ -27,7 +27,7 @@ public static void main(String[] args){
         
         JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>",false);
         jp.add(hrt);
-        hrt.setPreferredSize(new Dimension(110,75));
+        hrt.setPreferredSize(new Dimension(90,75));
         
         JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>",false);
         jp.add(ft);

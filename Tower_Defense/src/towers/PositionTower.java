@@ -1,10 +1,10 @@
 package towers;
 
 import java.awt.MouseInfo;
-public class Position {
+public class PositionTower {
 	private double y;
 	private double x;
-	public Position(){
+	public PositionTower(){
 		setY(MouseInfo.getPointerInfo().getLocation().getY());
 		setX(MouseInfo.getPointerInfo().getLocation().getX());
 	}

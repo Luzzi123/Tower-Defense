@@ -5,14 +5,14 @@ public abstract class TowerALG implements TowerInterface{
 	private int rangePXL;
 	private int shotdelay;
 	private int lvl=1;
-	private Position position;
+	private PositionTower position;
 	
 	public TowerALG(int dmg, int range, int shotdelay) {
 		super();
 		setDmg(dmg);
 		setRangePXL(range);
 		setShotdelay(shotdelay);
-		setPosition(new Position());
+		setPosition(new PositionTower());
 	}	
 	
 	
@@ -40,10 +40,10 @@ public abstract class TowerALG implements TowerInterface{
 	protected void setShotdelay(int shotdelay) {
 		this.shotdelay = shotdelay;
 	}
-	public Position getPosition() {
+	public PositionTower getPosition() {
 		return position;
 	}
-	protected void setPosition(Position position) {
+	protected void setPosition(PositionTower position) {
 		this.position = position;
 	}
 }
