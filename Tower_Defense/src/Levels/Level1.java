@@ -64,10 +64,9 @@ public static void main(String[] args){
 		jp.setBackground(Color.RED);
         		
         l1.add(jp, BorderLayout.NORTH);
-        l1.add(new JButton("dummy"), BorderLayout.CENTER);
+        l1.add(new Spielfeld(), BorderLayout.CENTER);
         l1.pack();
         l1.setVisible(true);
         l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
 	}
 }
