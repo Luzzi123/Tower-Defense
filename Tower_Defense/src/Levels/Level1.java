@@ -105,6 +105,7 @@ public class Level1 implements MouseListener {
 
 		l1.add(jp, BorderLayout.NORTH);
 		l1.add(sp, BorderLayout.CENTER);
+		l1.setResizable(false);
 		l1.pack();
 		l1.setVisible(true);
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
