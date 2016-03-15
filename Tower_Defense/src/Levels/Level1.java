@@ -3,6 +3,7 @@ package Levels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,8 @@ public class Level1 implements MouseListener {
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
 	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
+	
+	private Spielfeld sp = new Spielfeld();
 
 	public Level1() {
 		JFrame l1 = new JFrame("Level 1");
@@ -100,7 +103,7 @@ public class Level1 implements MouseListener {
 		jp.add(ft, c);
 		ft.setPreferredSize(new Dimension(90, 75));
 
-		Spielfeld sp = new Spielfeld();
+		
 		sp.addMouseListener(this);
 
 		l1.add(jp, BorderLayout.NORTH);
@@ -121,18 +124,22 @@ public class Level1 implements MouseListener {
 			if (nt.isSelected() == true) {
 				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
 				System.out.println("Normal Tower has been set.");
+				System.out.println(allTower + "\n");
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
 				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
 				System.out.println("Slow Tower has been set.");
+				System.out.println(allTower);
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
 				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
 				System.out.println("High Range Tower has been set.");
+				System.out.println(allTower);
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
 				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
 				System.out.println("Flame Tower has been set.");
+				System.out.println(allTower);
 				ft.setSelected(false);
 			}
 		}

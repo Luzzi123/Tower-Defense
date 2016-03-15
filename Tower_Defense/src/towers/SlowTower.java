@@ -11,6 +11,9 @@ public class SlowTower extends TowerALG {
 		setSlow(25);
 	}
 	
+	public String toString() {
+		return "SlowTower: " + super.toString() + "\n";
+	}
 	
 	@Override
 	public void lvlUpTo2() {

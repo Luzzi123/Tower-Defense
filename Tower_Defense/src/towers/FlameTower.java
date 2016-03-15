@@ -5,7 +5,9 @@ public class FlameTower extends TowerALG {
 		super(5,50,100, positionx, positiony);
 	}
 
-	
+	public String toString() {
+		return "FlameTower: " + super.toString() + "\n";
+	}
 	
 	public void lvlUpTo2() {
 		super.setDmg(6);

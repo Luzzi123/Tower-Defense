@@ -2,6 +2,16 @@ package towers;
 
 public class NormalTower extends TowerALG{
 
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NormalTower: " + super.toString() + "\n";
+	}
+
 	public NormalTower(double positionx, double positiony) {
 		super(15,100,500, positionx, positiony);
 	}

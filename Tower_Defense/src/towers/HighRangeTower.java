@@ -5,6 +5,10 @@ public class HighRangeTower extends TowerALG {
 	public HighRangeTower(double positionx, double positiony){
 		super(50,1300,5000, positionx, positiony);
 	}
+	
+	public String toString() {
+		return "HighRangeTower: " + super.toString() + "\n";
+	}
 
 	@Override
 	public void lvlUpTo2() {
