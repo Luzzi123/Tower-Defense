@@ -2,8 +2,8 @@ package towers;
 
 public class HighRangeTower extends TowerALG {
 
-	public HighRangeTower(){
-		super(50,1300,5000);
+	public HighRangeTower(double positionx, double positiony){
+		super(50,1300,5000, positionx, positiony);
 	}
 
 	@Override
