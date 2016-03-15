@@ -2,12 +2,12 @@ package towers;
 
 public class NormalTower extends TowerALG{
 
-	public NormalTower() {
-		super(15,100,500);
+	public NormalTower(double positionx, double positiony) {
+		super(15,100,500, positionx, positiony);
 	}
 	
-	public NormalTower(int dmg,int range,int shotdelay){
-		super(dmg,range,shotdelay);
+	public NormalTower(int dmg,int range,int shotdelay, double positionx, double positiony){
+		super(dmg,range,shotdelay, positionx, positiony);
 	}
 
 	@Override

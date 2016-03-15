@@ -119,19 +119,19 @@ public class Level1 implements MouseListener {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
 			System.out.println("___________________________________________");
 			if (nt.isSelected() == true) {
-				allTower.add(new NormalTower());
+				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
 				System.out.println("Normal Tower has been set.");
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
-				allTower.add(new SlowTower());
+				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
 				System.out.println("Slow Tower has been set.");
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
-				allTower.add(new HighRangeTower());
+				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
 				System.out.println("High Range Tower has been set.");
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
-				allTower.add(new FlameTower());
+				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
 				System.out.println("Flame Tower has been set.");
 				ft.setSelected(false);
 			}

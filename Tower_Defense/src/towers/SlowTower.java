@@ -1,12 +1,13 @@
 package towers;
 
 public class SlowTower extends TowerALG {
-	private int slow;	//Slow wird in % gezählt!
-	public SlowTower() {
-		super(5,50,2000);
+	private int slow;	//Slow wird in % gezï¿½hlt!
+	
+	public SlowTower(double positionx, double postiony) {
+		super(5,50,2000, positionx, positionx);
 	}
-	public SlowTower(int dmg,int range, int shotdelay){
-		super(dmg,range,shotdelay);
+	public SlowTower(int dmg,int range, int shotdelay, double positionx, double positiony){
+		super(dmg,range,shotdelay, positionx, positiony);
 		setSlow(25);
 	}
 	

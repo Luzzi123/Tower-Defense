@@ -1,8 +1,8 @@
 package towers;
 
 public class FlameTower extends TowerALG {
-	public FlameTower() {
-		super(5,50,100);
+	public FlameTower(double positionx, double positiony) {
+		super(5,50,100, positionx, positiony);
 	}
 
 	
