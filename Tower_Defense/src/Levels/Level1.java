@@ -118,47 +118,33 @@ public class Level1 implements MouseListener {
 		new Level1();
 	}
 
-	private int positionx = 0;
-	private int positiony = 0;
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		positionx = arg0.getX();
-		positiony = arg0.getY();
+		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
+			System.out.println("___________________________________________");
+			if (nt.isSelected() == true) {
+				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
+				System.out.println("Normal Tower has been set.");
+				nt.setSelected(false);
+			} else if (st.isSelected() == true) {
+				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
+				System.out.println("Slow Tower has been set.");
+				st.setSelected(false);
+			} else if (hrt.isSelected() == true) {
+				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
+				System.out.println("High Range Tower has been set.");
+				hrt.setSelected(false);
+			} else if (ft.isSelected() == true) {
+				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
+				System.out.println("Flame Tower has been set.");
+				ft.setSelected(false);
+			}
+		}
 		sp.repaint();
-//		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
-//			System.out.println("___________________________________________");
-//			if (nt.isSelected() == true) {
-//				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
-//				System.out.println("Normal Tower has been set.");
-//				System.out.println(allTower + "\n");
-//				paintnormTower(Graphics g, arg0.getX(), arg0.getY());
-//				nt.setSelected(false);
-//			} else if (st.isSelected() == true) {
-//				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
-//				System.out.println("Slow Tower has been set.");
-//				System.out.println(allTower);
-//				st.setSelected(false);
-//			} else if (hrt.isSelected() == true) {
-//				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
-//				System.out.println("High Range Tower has been set.");
-//				System.out.println(allTower);
-//				hrt.setSelected(false);
-//			} else if (ft.isSelected() == true) {
-//				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
-//				System.out.println("Flame Tower has been set.");
-//				System.out.println(allTower);
-//				ft.setSelected(false);
-//			}
-//		}
 	}
 
-	public int getPositionx() {
-		return positionx;
-	}
-	public int getPositiony() {
-		return positiony;
-	}
+
 	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {

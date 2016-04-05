@@ -23,7 +23,16 @@ public class Spielfeld extends JPanel{
 		// TODO Auto-generated method stub
 		g.clearRect(0, 0, 640, 480);
 		g.drawLine(0, 0, 640, 480);
-		g.drawRect(l.getPositionx(), l.getPositiony(), 20, 30);
+		g.drawRect(getPositionxfromarray(), getPositionyfromarray(), 20, 30);
+	}
+	
+	protected void getPositionyfromarray() {
+
+		
+	}
+	protected void getPositionxfromarray(){
+		
+		
 	}
 	
 }
