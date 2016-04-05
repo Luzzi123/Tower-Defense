@@ -2,6 +2,8 @@ package Menu;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,17 +33,20 @@ public class Menu{
 		frame.setBounds(100,100,700,700);
 		frame.setLayout(new BorderLayout());
 		abstpan.setLayout(new BoxLayout(abstpan,BoxLayout.Y_AXIS));
+		abstpan.setPreferredSize(new Dimension(100, 100));
 		
-
-		playbutton.setSize(new Dimension(500,100));
+		ActionListener actionbyexit= new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		};
+		
+		exitbutton.addActionListener(actionbyexit);
+		
+		
 		abstpan.add(playbutton,abstpan);
 		abstpan.add(exitbutton,abstpan);
-		abstpan.setPreferredSize(new Dimension(100, 100));
 		frame.add(abstpan,BorderLayout.NORTH);
-		
-		
-		
-		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

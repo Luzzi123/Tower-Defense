@@ -23,11 +23,11 @@ public class Level1 implements MouseListener {
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
 	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
-	
-	private Spielfeld sp = new Spielfeld();
+	private Spielfeld sp = new Spielfeld(this);
 
 	public Level1() {
 		JFrame l1 = new JFrame("Level 1");
+		l1.setSize(640,580);
 		l1.setLayout(new BorderLayout());
 		l1.setLocationRelativeTo(null);
 
@@ -110,7 +110,6 @@ public class Level1 implements MouseListener {
 		l1.add(jp, BorderLayout.NORTH);
 		l1.add(sp, BorderLayout.CENTER);
 		l1.setResizable(false);
-		l1.pack();
 		l1.setVisible(true);
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -119,34 +118,48 @@ public class Level1 implements MouseListener {
 		new Level1();
 	}
 
+	private int positionx = 0;
+	private int positiony = 0;
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
-			System.out.println("___________________________________________");
-			if (nt.isSelected() == true) {
-				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
-				System.out.println("Normal Tower has been set.");
-				System.out.println(allTower + "\n");
-				nt.setSelected(false);
-			} else if (st.isSelected() == true) {
-				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
-				System.out.println("Slow Tower has been set.");
-				System.out.println(allTower);
-				st.setSelected(false);
-			} else if (hrt.isSelected() == true) {
-				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
-				System.out.println("High Range Tower has been set.");
-				System.out.println(allTower);
-				hrt.setSelected(false);
-			} else if (ft.isSelected() == true) {
-				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
-				System.out.println("Flame Tower has been set.");
-				System.out.println(allTower);
-				ft.setSelected(false);
-			}
-		}
+		positionx = arg0.getX();
+		positiony = arg0.getY();
+		sp.repaint();
+//		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
+//			System.out.println("___________________________________________");
+//			if (nt.isSelected() == true) {
+//				allTower.add(new NormalTower(arg0.getX(), arg0.getY()));
+//				System.out.println("Normal Tower has been set.");
+//				System.out.println(allTower + "\n");
+//				paintnormTower(Graphics g, arg0.getX(), arg0.getY());
+//				nt.setSelected(false);
+//			} else if (st.isSelected() == true) {
+//				allTower.add(new SlowTower(arg0.getX(), arg0.getY()));
+//				System.out.println("Slow Tower has been set.");
+//				System.out.println(allTower);
+//				st.setSelected(false);
+//			} else if (hrt.isSelected() == true) {
+//				allTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
+//				System.out.println("High Range Tower has been set.");
+//				System.out.println(allTower);
+//				hrt.setSelected(false);
+//			} else if (ft.isSelected() == true) {
+//				allTower.add(new FlameTower(arg0.getX(), arg0.getY()));
+//				System.out.println("Flame Tower has been set.");
+//				System.out.println(allTower);
+//				ft.setSelected(false);
+//			}
+//		}
 	}
 
+	public int getPositionx() {
+		return positionx;
+	}
+	public int getPositiony() {
+		return positiony;
+	}
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
