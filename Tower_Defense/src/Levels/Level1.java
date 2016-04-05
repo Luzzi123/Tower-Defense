@@ -81,6 +81,7 @@ public class Level1 implements MouseListener {
 		c.fill = GridBagConstraints.NORTH;
 		c.gridx = 0;
 		c.gridy = 0;
+		
 		nt.addActionListener(actionNT);
 		jp.add(nt, c);
 		nt.setPreferredSize(new Dimension(90, 75));

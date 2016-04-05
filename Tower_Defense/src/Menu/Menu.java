@@ -1,27 +1,58 @@
 package Menu;
 
-import javax.swing.*;
 import java.awt.BorderLayout;
-import java.io.*;
-import javax.imageio.*;
+import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 
-public class Menu {
-	static JFrame menu = new JFrame("Menu");
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Menu{
+	static JFrame frame= new JFrame();	
+	static JPanel abstpan= new JPanel();
+	static JButton playbutton= new JButton("Play");
+	static JButton exitbutton= new JButton("Exit");
+	
+	
 	public Menu(){
-		try{
-			menu.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Green_Smiley.jpg")))));
-		}catch(IOException e){
-			System.out.println("IMG Doesn't exist");
+		
+		try {
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("grassBackground.jpg")))));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		menu.setResizable(false);
-		menu.setLayout(new BorderLayout());
-		menu.setSize(700,700);
-		menu.setVisible(true);
-		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setUndecorated(true);
+		frame.setBounds(100,100,700,700);
+		frame.setLayout(new BorderLayout());
+		abstpan.setLayout(new BoxLayout(abstpan,BoxLayout.Y_AXIS));
+		
+
+		playbutton.setSize(new Dimension(500,100));
+		abstpan.add(playbutton,abstpan);
+		abstpan.add(exitbutton,abstpan);
+		abstpan.setPreferredSize(new Dimension(100, 100));
+		frame.add(abstpan,BorderLayout.NORTH);
+		
+		
+		
+		
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 	
-	
-	public static void main(String[] args) {
+	public static void main(String args[]) {
 		new Menu();
 	}
+	
+	
+	
+	
+	
 }
