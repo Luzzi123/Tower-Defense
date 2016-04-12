@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Levels.Level1;
+
 public class Menu{
 	static JFrame frame= new JFrame();	
 	static JPanel abstpan= new JPanel();
@@ -25,12 +27,12 @@ public class Menu{
 	public Menu(){
 		
 		try {
-			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("grassBackground.jpg")))));
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("TestBackground.jpg")))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		frame.setUndecorated(true);
-		frame.setBounds(100,100,700,700);
+		frame.setBounds(653,210,640,581);
 		frame.setLayout(new BorderLayout());
 		abstpan.setLayout(new BoxLayout(abstpan,BoxLayout.Y_AXIS));
 		abstpan.setPreferredSize(new Dimension(100, 100));
@@ -40,8 +42,15 @@ public class Menu{
 				System.exit(0);
 			}
 		};
-		
+		ActionListener actionbyplay= new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				new Level1();
+				frame.dispose();
+			}
+			
+		};
 		exitbutton.addActionListener(actionbyexit);
+		playbutton.addActionListener(actionbyplay);
 		
 		
 		abstpan.add(playbutton,abstpan);

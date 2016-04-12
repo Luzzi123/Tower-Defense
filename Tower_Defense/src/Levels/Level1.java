@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -19,9 +18,12 @@ import javax.swing.JToggleButton;
 import towers.*;
 
 public class Level1 implements MouseListener,MouseMotionListener {
-	public static double mouseposX = 0.0;
-	public static double mouseposY = 0.0;
+	protected static double mouseposX = 0.0;
+	protected static double mouseposY = 0.0;
+	
+	
 	protected static ArrayList<Position> way = new ArrayList<Position>();
+	
 	protected static ArrayList<NormalTower> allNormTower = new ArrayList<NormalTower>();
 	protected static ArrayList<SlowTower> allSlowTower= new ArrayList<SlowTower>();
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
@@ -35,13 +37,13 @@ public class Level1 implements MouseListener,MouseMotionListener {
 
 	public Level1() {
 		JFrame l1 = new JFrame("Level 1");
-		l1.setSize(640,580);
 		l1.setLayout(new BorderLayout());
 		l1.setLocationRelativeTo(null);
+		l1.setBounds(650,210,0,0);
 
 		JPanel jp = new JPanel();
 		jp.setLayout(new GridBagLayout());
-		jp.setBackground(Color.RED);
+		jp.setBackground(Color.LIGHT_GRAY);
 
 		// Define ActionListener
 		ActionListener actionNT = new ActionListener() {
@@ -119,6 +121,7 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		l1.add(jp, BorderLayout.NORTH);
 		l1.add(sp, BorderLayout.CENTER);
 		l1.setResizable(false);
+		l1.pack();
 		l1.setVisible(true);
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -193,6 +196,7 @@ public class Level1 implements MouseListener,MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		mouseposX = sp.getMousePosition().getX();
 		mouseposY = sp.getMousePosition().getY();
+		
 	}
 	
 	
