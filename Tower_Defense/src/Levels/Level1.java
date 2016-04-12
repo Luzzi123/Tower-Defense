@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
@@ -16,7 +18,10 @@ import javax.swing.JToggleButton;
 
 import towers.*;
 
-public class Level1 implements MouseListener {
+public class Level1 implements MouseListener,MouseMotionListener {
+	public static double mouseposX = 0.0;
+	public static double mouseposY = 0.0;
+	protected static ArrayList<Position> way = new ArrayList<Position>();
 	protected static ArrayList<NormalTower> allNormTower = new ArrayList<NormalTower>();
 	protected static ArrayList<SlowTower> allSlowTower= new ArrayList<SlowTower>();
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
@@ -26,7 +31,7 @@ public class Level1 implements MouseListener {
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
 	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
-	private static Spielfeld sp = new Spielfeld(null);
+	protected static Spielfeld sp = new Spielfeld(null);
 
 	public Level1() {
 		JFrame l1 = new JFrame("Level 1");
@@ -109,6 +114,7 @@ public class Level1 implements MouseListener {
 
 		
 		sp.addMouseListener(this);
+		sp.addMouseMotionListener(this);
 
 		l1.add(jp, BorderLayout.NORTH);
 		l1.add(sp, BorderLayout.CENTER);
@@ -122,7 +128,7 @@ public class Level1 implements MouseListener {
 		while(true){
 			sp.repaint();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -135,19 +141,19 @@ public class Level1 implements MouseListener {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
 			System.out.println("___________________________________________");
 			if (nt.isSelected() == true) {
-				allNormTower.add(new NormalTower(arg0.getX(), arg0.getY()));
+				allNormTower.add(new NormalTower(arg0.getX()-15, arg0.getY()-15));
 				System.out.println("Normal Tower has been set.");
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
-				allSlowTower.add(new SlowTower(arg0.getX(),arg0.getY()));
+				allSlowTower.add(new SlowTower(arg0.getX()-15,arg0.getY()-15));
 				System.out.println("Slow Tower has been set.");
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
-				allHighRangeTower.add(new HighRangeTower(arg0.getX(), arg0.getY()));
+				allHighRangeTower.add(new HighRangeTower(arg0.getX()-15, arg0.getY()-15));
 				System.out.println("High Range Tower has been set.");
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
-				allFlameTower.add(new FlameTower(arg0.getX(), arg0.getY()));
+				allFlameTower.add(new FlameTower(arg0.getX()-15, arg0.getY()-15));
 				System.out.println("Flame Tower has been set.");
 				ft.setSelected(false);
 			}
@@ -157,13 +163,14 @@ public class Level1 implements MouseListener {
 
 	
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseEntered(MouseEvent arg0) {		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		mouseposX = 0.0;
+		mouseposY = 0.0;
+		
 	}
 
 	@Override
@@ -173,7 +180,19 @@ public class Level1 implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		mouseposX = sp.getMousePosition().getX();
+		mouseposY = sp.getMousePosition().getY();
 	}
 	
 	
