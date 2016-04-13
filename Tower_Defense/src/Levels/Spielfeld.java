@@ -18,7 +18,6 @@ public class Spielfeld extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, 640, 480);
-		g.drawLine(0, 0, 640, 480);
 		drawselectedTow(g);
 		drawallNormTow(g);
 		drawallSlowTow(g);

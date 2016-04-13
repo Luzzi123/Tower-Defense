@@ -122,12 +122,12 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		l1.add(sp, BorderLayout.CENTER);
 		l1.setResizable(false);
 		l1.pack();
-		l1.setVisible(true);
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		l1.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
-		new Level1();
+		new Spielfeld(null);
 		while(true){
 			sp.repaint();
 			try {
