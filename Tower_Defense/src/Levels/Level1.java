@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
@@ -129,15 +133,13 @@ public class Level1 implements MouseListener,MouseMotionListener {
 	
 	public static void main(String[] args) {
 		new Level1();
-		new Spielfeld(null);
-		while(true){
-			sp.repaint();
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		try {
+			read();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+
 	}
 
 	
@@ -196,8 +198,24 @@ public class Level1 implements MouseListener,MouseMotionListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		mouseposX = sp.getMousePosition().getX();
-		mouseposY = sp.getMousePosition().getY();
+		mouseposX = e.getX();
+		mouseposY = e.getY();
+		sp.repaint();
+	}
+	
+	public static void read() throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader("Weg_Level1.txt"));
+		String zeile = reader.readLine();
+		while(zeile != null) {
+			String[] weg = zeile.split("/");
+	        String x = weg[0];
+	        String y = weg[1];
+	        int xPos = Integer.parseInt(x);
+	        int yPos = Integer.parseInt(y);
+	        Position p = new Position(xPos,yPos);
+	        way.add(p);
+	        zeile = reader.readLine();
+		}
 		
 	}
 	

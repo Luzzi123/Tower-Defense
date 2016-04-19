@@ -2,7 +2,7 @@ package enemys;
 
 public abstract class EnemyALG {
 	private int hp;
-	private double movespeed; //Ist ein Multiplikator von dem basiswert(50)
+	private double movespeed;
 	private double posx;
 	private double posy;
 	

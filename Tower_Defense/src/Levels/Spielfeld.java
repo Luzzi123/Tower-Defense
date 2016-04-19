@@ -2,7 +2,10 @@ package Levels;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
+import enemys.Position;
 
 public class Spielfeld extends JPanel{
 	
@@ -10,6 +13,7 @@ public class Spielfeld extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected int ignoreme =-5;
 	
 	public Spielfeld(Level1 l) {
 		this.setPreferredSize(new Dimension(640, 480));
@@ -17,6 +21,9 @@ public class Spielfeld extends JPanel{
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
+		if(ignoreme<1){
+			drawWay(Level1.way, g);
+		}
 		g.clearRect(0, 0, 640, 480);
 		drawselectedTow(g);
 		drawallNormTow(g);
@@ -24,6 +31,18 @@ public class Spielfeld extends JPanel{
 		drawallFlameTow(g);
 		drawallHRTow(g);
 		
+	}
+	
+	private void drawWay(ArrayList <Position> w, Graphics g){
+		Position zww1;
+		Position zww2;
+		for(int i=2; i<w.size();i++){
+			zww1=w.get(i-2);
+			zww2=w.get(i);
+			g.drawLine(zww1.getX(),zww1.getY(),zww2.getX(),zww2.getY());
+		}
+		g.drawLine(0, 0, 300, 300);
+		ignoreme++;
 	}
 	
 	

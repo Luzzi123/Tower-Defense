@@ -1,8 +1,8 @@
 package enemys;
 
 public class Position {
-	protected double x;
-	protected double y;
+	protected static int x;
+	protected static int y;
 	
 	public Position(int x,int y){
 		setX(x);
@@ -10,16 +10,16 @@ public class Position {
 	}
 
 	
-	protected void setX(double x) {
+	private void setX(int x) {
 		this.x = x;
 	}
-	protected void setY(double y) {
+	private void setY(int y) {
 		this.y = y;
 	}
-	protected double getX() {
+	public int getX() {
 		return x;
 	}
-	protected double getY() {
+	public int getY() {
 		return y;
 	}
 	
