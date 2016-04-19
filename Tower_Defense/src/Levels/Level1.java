@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import enemys.Position;
 import towers.*;
 
 public class Level1 implements MouseListener,MouseMotionListener {
@@ -127,6 +128,7 @@ public class Level1 implements MouseListener,MouseMotionListener {
 	}
 	
 	public static void main(String[] args) {
+		new Level1();
 		new Spielfeld(null);
 		while(true){
 			sp.repaint();
