@@ -1,5 +1,9 @@
 package Menu;
 
+
+import Levels.Level1;
+
+
 public class Controller 
 {
 	
@@ -16,7 +20,7 @@ public class Controller
 		System.exit(1);
 	}
 	
-	public void play(){
+	public void savepoint(){
 		new Level1();
 	}
 }

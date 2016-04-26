@@ -22,7 +22,7 @@
           <Menu mnemonicParsing="false" text="Spielen">
             <items>
               <MenuItem mnemonicParsing="false" text="Von Anfang an" />
-                  <MenuItem mnemonicParsing="false" text="Von Save Point" />
+                  <MenuItem mnemonicParsing="false" onAction="#savepoint" text="Von Save Point" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Levelauswahl">
@@ -43,7 +43,7 @@
          <children>
             <ImageView fitHeight="371.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../git/Tower_Defense/Tower_Defense/Titelbild.png" />
+                  <Image url="@../../Titelbild.png" />
                </image>
             </ImageView>
             <GridPane prefHeight="356.0" prefWidth="600.0">
@@ -65,7 +65,7 @@
                         <Font size="26.0" />
                      </font>
                   </Button>
-                  <Button fx:id="playButton" mnemonicParsing="false" onMouseClicked="#play" prefHeight="93.0" prefWidth="121.0" style="-fx-background-color: #607D8B;" text="Play" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="playButton" mnemonicParsing="false" onMouseClicked="#savepoint" onMouseExited="#exit" prefHeight="93.0" prefWidth="121.0" style="-fx-background-color: #607D8B;" text="Play" textFill="WHITE" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="20.0" left="130.0" />
                      </GridPane.margin>
