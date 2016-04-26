@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,21 +18,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import enemys.Position;
+import enemys.*;
 import towers.*;
 
-public class Level1 implements MouseListener,MouseMotionListener {
+public class Level1 implements MouseListener, MouseMotionListener {
 	protected static double mouseposX = 0.0;
 	protected static double mouseposY = 0.0;
 	
-	
+	//Gegner
+	protected static ArrayList<Object> enemys = new ArrayList<Object> ();
+	//Weg
 	protected static ArrayList<Position> way = new ArrayList<Position>();
-	
+	//Türme
 	protected static ArrayList<NormalTower> allNormTower = new ArrayList<NormalTower>();
-	protected static ArrayList<SlowTower> allSlowTower= new ArrayList<SlowTower>();
+	protected static ArrayList<SlowTower> allSlowTower = new ArrayList<SlowTower>();
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
-	protected static ArrayList<HighRangeTower> allHighRangeTower= new ArrayList<HighRangeTower>();
-	
+	protected static ArrayList<HighRangeTower> allHighRangeTower = new ArrayList<HighRangeTower>();
+	//Buttons
 	static JToggleButton nt = new JToggleButton("<html><center>Normal<br>Tower</center></html>", false);
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
@@ -41,10 +42,11 @@ public class Level1 implements MouseListener,MouseMotionListener {
 	protected static Spielfeld sp = new Spielfeld(null);
 
 	public Level1() {
+		//JFrame bearbeitung
 		JFrame l1 = new JFrame("Level 1");
 		l1.setLayout(new BorderLayout());
 		l1.setLocationRelativeTo(null);
-		l1.setBounds(650,210,0,0);
+		l1.setBounds(650, 210, 0, 0);
 
 		JPanel jp = new JPanel();
 		jp.setLayout(new GridBagLayout());
@@ -96,7 +98,7 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		c.fill = GridBagConstraints.NORTH;
 		c.gridx = 0;
 		c.gridy = 0;
-		
+
 		nt.addActionListener(actionNT);
 		jp.add(nt, c);
 		nt.setPreferredSize(new Dimension(90, 75));
@@ -119,7 +121,6 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		jp.add(ft, c);
 		ft.setPreferredSize(new Dimension(90, 75));
 
-		
 		sp.addMouseListener(this);
 		sp.addMouseMotionListener(this);
 
@@ -130,54 +131,50 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		l1.setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
 		new Level1();
 		try {
-			read();
+			readway();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
 	}
 
-	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
 			System.out.println("___________________________________________");
 			if (nt.isSelected() == true) {
-				allNormTower.add(new NormalTower(arg0.getX()-15, arg0.getY()-15));
+				allNormTower.add(new NormalTower(arg0.getX() - 15, arg0.getY() - 15));
 				System.out.println("Normal Tower has been set.");
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
-				allSlowTower.add(new SlowTower(arg0.getX()-15,arg0.getY()-15));
+				allSlowTower.add(new SlowTower(arg0.getX() - 15, arg0.getY() - 15));
 				System.out.println("Slow Tower has been set.");
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
-				allHighRangeTower.add(new HighRangeTower(arg0.getX()-15, arg0.getY()-15));
+				allHighRangeTower.add(new HighRangeTower(arg0.getX() - 15, arg0.getY() - 15));
 				System.out.println("High Range Tower has been set.");
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
-				allFlameTower.add(new FlameTower(arg0.getX()-15, arg0.getY()-15));
+				allFlameTower.add(new FlameTower(arg0.getX() - 15, arg0.getY() - 15));
 				System.out.println("Flame Tower has been set.");
 				ft.setSelected(false);
 			}
 		}
 	}
 
-
-	
 	@Override
-	public void mouseEntered(MouseEvent arg0) {		
+	public void mouseEntered(MouseEvent arg0) {
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		mouseposX = 0.0;
 		mouseposY = 0.0;
-		
+
 	}
 
 	@Override
@@ -187,13 +184,13 @@ public class Level1 implements MouseListener,MouseMotionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -202,22 +199,38 @@ public class Level1 implements MouseListener,MouseMotionListener {
 		mouseposY = e.getY();
 		sp.repaint();
 	}
-	
-	public static void read() throws IOException{
+
+	public static void readway() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("Weg_Level1.txt"));
 		String zeile = reader.readLine();
-		while(zeile != null) {
+		while (zeile != null) {
 			String[] weg = zeile.split("/");
-	        String x = weg[0];
-	        String y = weg[1];
-	        int xPos = Integer.parseInt(x);
-	        int yPos = Integer.parseInt(y);
-	        Position p = new Position(xPos,yPos);
-	        way.add(p);
-	        zeile = reader.readLine();
+			String x = weg[0];
+			String y = weg[1];
+			int xPos = Integer.parseInt(x);
+			int yPos = Integer.parseInt(y);
+			way.add(new Position(xPos,yPos));
+			zeile = reader.readLine();
 		}
-		
 	}
 	
-	
+	public static void readenemys() throws IOException{
+		BufferedReader reader= new BufferedReader(new FileReader("Enemys_Level1.txt"));
+		String line = reader.readLine();
+			String [] enemys = line.split(";");
+			for(int i=0;i<enemys.length;i++){
+				if(enemys[i].equals(new NormalEnemy())){
+					
+				}
+				else if(){
+					
+				}
+				else if(){
+					
+				}
+				else{
+					
+				}
+			}
+	}
 }

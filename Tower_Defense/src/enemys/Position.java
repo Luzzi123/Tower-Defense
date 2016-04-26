@@ -1,19 +1,20 @@
 package enemys;
 
 public class Position {
-	protected static int x;
-	protected static int y;
+	protected int x;
+	protected int y;
 	
 	public Position(int x,int y){
 		setX(x);
 		setY(y);
 	}
-
 	
-	private void setX(int x) {
+
+
+	public void setX(int x) {
 		this.x = x;
 	}
-	private void setY(int y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 	public int getX() {
@@ -21,6 +22,15 @@ public class Position {
 	}
 	public int getY() {
 		return y;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Position [getX()=" + getX() + ", getY()=" + getY() + "]";
 	}
 	
 	
