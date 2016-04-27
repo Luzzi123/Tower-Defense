@@ -136,6 +136,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		new Level1();
 		try {
 			readway();
+			readenemys();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -217,19 +218,13 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	public static void readenemys() throws IOException{
 		BufferedReader reader= new BufferedReader(new FileReader("Enemys_Level1.txt"));
 		String line = reader.readLine();
-			String [] enemys = line.split(";");
-			for(int i=0;i<enemys.length;i++){
-				if(enemys[i].equals(new NormalEnemy())){
-					
+			String [] allenemys = line.split(";");
+			for(int i=0;i<allenemys.length;i++){
+				if(allenemys[i].equals("normenemy")== true){
+					enemys.add(new NormalEnemy(way.get(0).getX(),way.get(0).getY()));
 				}
-				else if(){
-					
-				}
-				else if(){
-					
-				}
-				else{
-					
+				else if(allenemys[i].equals("speedenemy")== true){			
+					enemys.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY()));
 				}
 			}
 	}
