@@ -17,7 +17,7 @@ public class Controller
 	}
 	
 	public void exit(){
-		System.exit(1);
+		
 	}
 	
 	public void savepoint(){
