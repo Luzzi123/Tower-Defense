@@ -1,1 +1,1 @@
-normenemy;normenemy
+norm;speed

@@ -3,6 +3,7 @@ package Levels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -24,25 +26,27 @@ import towers.*;
 public class Level1 implements MouseListener, MouseMotionListener {
 	protected static double mouseposX = 0.0;
 	protected static double mouseposY = 0.0;
-	
-	//Gegner
-	protected static ArrayList<Object> enemys = new ArrayList<Object> ();
-	//Weg
+
+	// Gegner
+	protected static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
+	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
+	// Weg
 	protected static ArrayList<Position> way = new ArrayList<Position>();
-	//Türme
+	// Türme
 	protected static ArrayList<NormalTower> allNormTower = new ArrayList<NormalTower>();
 	protected static ArrayList<SlowTower> allSlowTower = new ArrayList<SlowTower>();
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
 	protected static ArrayList<HighRangeTower> allHighRangeTower = new ArrayList<HighRangeTower>();
-	//Buttons
+	// Buttons, etc.
 	static JToggleButton nt = new JToggleButton("<html><center>Normal<br>Tower</center></html>", false);
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
 	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
+	protected static JLabel lb = new JLabel();
 	protected static Spielfeld sp = new Spielfeld(null);
 
 	public Level1() {
-		//JFrame bearbeitung
+		// JFrame bearbeitung
 		JFrame l1 = new JFrame("Level 1");
 		l1.setLayout(new BorderLayout());
 		l1.setLocationRelativeTo(null);
@@ -59,8 +63,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					st.setSelected(false);
 					hrt.setSelected(false);
 					ft.setSelected(false);
-					System.out.println("Click somewhere to place a Normal Tower.");
+					lb.setText("Click somewhere to place a Normal Tower.");
 				}
+				else
+					lb.setText("");
 			}
 		};
 		ActionListener actionST = new ActionListener() {
@@ -69,8 +75,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					nt.setSelected(false);
 					hrt.setSelected(false);
 					ft.setSelected(false);
-					System.out.println("Click somewhere to place a Slow Tower.");
+					lb.setText("Click somewhere to place a Slow Tower.");
 				}
+				else
+					lb.setText("");
 			}
 		};
 		ActionListener actionHRT = new ActionListener() {
@@ -79,8 +87,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					nt.setSelected(false);
 					ft.setSelected(false);
 					st.setSelected(false);
-					System.out.println("Click somewhere to place a High Range Tower.");
+					lb.setText("Click somewhere to place a High Range Tower.");
 				}
+				else
+					lb.setText("");
 			}
 		};
 		ActionListener actionFT = new ActionListener() {
@@ -89,8 +99,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					nt.setSelected(false);
 					st.setSelected(false);
 					hrt.setSelected(false);
-					System.out.println("Click somewhere to place a Flame Tower.");
+					lb.setText("Click somewhere to place a Flame Tower.");
 				}
+				else
+					lb.setText("");
 			}
 		};
 
@@ -124,8 +136,11 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		sp.addMouseListener(this);
 		sp.addMouseMotionListener(this);
 
+		lb.setPreferredSize(new Dimension(0, 25));
+
 		l1.add(jp, BorderLayout.NORTH);
 		l1.add(sp, BorderLayout.CENTER);
+		l1.add(lb, BorderLayout.SOUTH);
 		l1.setResizable(false);
 		l1.pack();
 		l1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,29 +156,26 @@ public class Level1 implements MouseListener, MouseMotionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		sp.repaint();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
-			System.out.println("___________________________________________");
 			if (nt.isSelected() == true) {
 				allNormTower.add(new NormalTower(arg0.getX() - 15, arg0.getY() - 15));
-				System.out.println("Normal Tower has been set.");
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
 				allSlowTower.add(new SlowTower(arg0.getX() - 15, arg0.getY() - 15));
-				System.out.println("Slow Tower has been set.");
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
 				allHighRangeTower.add(new HighRangeTower(arg0.getX() - 15, arg0.getY() - 15));
-				System.out.println("High Range Tower has been set.");
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
 				allFlameTower.add(new FlameTower(arg0.getX() - 15, arg0.getY() - 15));
-				System.out.println("Flame Tower has been set.");
 				ft.setSelected(false);
 			}
+			lb.setText("");
 		}
 	}
 
@@ -210,22 +222,21 @@ public class Level1 implements MouseListener, MouseMotionListener {
 			String y = weg[1];
 			int xPos = Integer.parseInt(x);
 			int yPos = Integer.parseInt(y);
-			way.add(new Position(xPos,yPos));
+			way.add(new Position(xPos, yPos));
 			zeile = reader.readLine();
 		}
 	}
-	
-	public static void readenemys() throws IOException{
-		BufferedReader reader= new BufferedReader(new FileReader("Enemys_Level1.txt"));
+
+	public static void readenemys() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("Enemys_Level1.txt"));
 		String line = reader.readLine();
-			String [] allenemys = line.split(";");
-			for(int i=0;i<allenemys.length;i++){
-				if(allenemys[i].equals("normenemy")== true){
-					enemys.add(new NormalEnemy(way.get(0).getX(),way.get(0).getY()));
-				}
-				else if(allenemys[i].equals("speedenemy")== true){			
-					enemys.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY()));
-				}
+		String[] allenemys = line.split(";");
+		for (int i = 0; i < allenemys.length; i++) {
+			if (allenemys[i].equals("norm") == true) {
+				normenemys.add(new NormalEnemy(way.get(0).getX(), way.get(0).getY()));
+			} else if (allenemys[i].equals("speed") == true) {
+				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY()));
 			}
+		}
 	}
 }

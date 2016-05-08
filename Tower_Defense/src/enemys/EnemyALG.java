@@ -1,8 +1,9 @@
 package enemys;
 
 public abstract class EnemyALG {
+	private boolean visble = false;
 	private int hp;
-	private double movespeed;
+	private double moveCountdown;
 	private int posx;
 	private int posy;
 	
@@ -24,19 +25,29 @@ public abstract class EnemyALG {
 		return hp;
 	}
 	public double getMovespeed() {
-		return movespeed;
+		return moveCountdown;
 	}
 	private void setHp(int hp) {
 		this.hp = hp;
 	}
 	private void setMovespeed(double movespeed2) {
-		this.movespeed = movespeed2;
+		this.moveCountdown = movespeed2;
 	}
-	public double getPosx() {
+	public int getPosx() {
 		return posx;
 	}
-	public double getPosy() {
+	public int getPosy() {
 		return posy;
+	}
+
+
+	public boolean isVisble() {
+		return visble;
+	}
+
+
+	public void setVisble(boolean visble) {
+		this.visble = visble;
 	}
 	
 	

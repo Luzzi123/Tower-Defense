@@ -22,13 +22,13 @@ public class Spielfeld extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, 640, 480);
-			drawWay(g);
+		drawWay(g);
+		drawEnemy(g);
 		drawselectedTow(g);
 		drawallNormTow(g);
 		drawallSlowTow(g);
 		drawallFlameTow(g);
 		drawallHRTow(g);
-
 	}
 
 	private void drawWay(Graphics g) {
@@ -77,5 +77,14 @@ public class Spielfeld extends JPanel {
 			g.drawRect((int) Level1.allNormTower.get(i).getPositionx(), (int) Level1.allNormTower.get(i).getPositiony(),
 					30, 30);
 		}
+	}
+	
+	private void drawEnemy(Graphics g){
+		for(int i=0; i<Level1.normenemys.size();i++)
+			if(Level1.normenemys.get(i).isVisble()==true)	
+				g.drawOval(Level1.normenemys.get(i).getPosx()-15, Level1.normenemys.get(i).getPosy()-15, 30, 30);
+		for(int i=0;i<Level1.speedenemy.size();i++)
+			if(Level1.speedenemy.get(i).isVisble())
+				g.drawOval(Level1.speedenemy.get(i).getPosx()-10, Level1.speedenemy.get(i).getPosy()-10, 20, 20);
 	}
 }
