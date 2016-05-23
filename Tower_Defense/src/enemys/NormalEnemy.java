@@ -3,6 +3,7 @@ package enemys;
 public class NormalEnemy extends EnemyALG {
 	
 	public NormalEnemy(int posx, int posy){
-		super(40,1.0,posx,posy);
+		//Test
+		super(40,posx,posy,100,30);
 	}
 }

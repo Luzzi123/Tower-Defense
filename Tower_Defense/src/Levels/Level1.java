@@ -3,7 +3,6 @@ package Levels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -31,7 +30,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
 	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
 	// Weg
-	protected static ArrayList<Position> way = new ArrayList<Position>();
+	public static ArrayList<Position> way = new ArrayList<Position>();
 	// Türme
 	protected static ArrayList<NormalTower> allNormTower = new ArrayList<NormalTower>();
 	protected static ArrayList<SlowTower> allSlowTower = new ArrayList<SlowTower>();
@@ -43,7 +42,9 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
 	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
 	protected static JLabel lb = new JLabel();
-	protected static Spielfeld sp = new Spielfeld(null);
+	public static Spielfeld sp = new Spielfeld(null);
+	private static BufferedReader wayreader;
+	private static BufferedReader enemyreader;
 
 	public Level1() {
 		// JFrame bearbeitung
@@ -64,8 +65,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					hrt.setSelected(false);
 					ft.setSelected(false);
 					lb.setText("Click somewhere to place a Normal Tower.");
-				}
-				else
+				} else
 					lb.setText("");
 			}
 		};
@@ -76,8 +76,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					hrt.setSelected(false);
 					ft.setSelected(false);
 					lb.setText("Click somewhere to place a Slow Tower.");
-				}
-				else
+				} else
 					lb.setText("");
 			}
 		};
@@ -88,8 +87,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					ft.setSelected(false);
 					st.setSelected(false);
 					lb.setText("Click somewhere to place a High Range Tower.");
-				}
-				else
+				} else
 					lb.setText("");
 			}
 		};
@@ -100,8 +98,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					st.setSelected(false);
 					hrt.setSelected(false);
 					lb.setText("Click somewhere to place a Flame Tower.");
-				}
-				else
+				} else
 					lb.setText("");
 			}
 		};
@@ -147,16 +144,16 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		l1.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		new Level1();
-		try {
-			readway();
-			readenemys();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		readway();
+		readenemys();
 		sp.repaint();
+		Thread.sleep(3000);
+		while(true){
+			moveenemys();
+			Thread.sleep(5);
+		}
 	}
 
 	@Override
@@ -214,8 +211,8 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	}
 
 	public static void readway() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("Weg_Level1.txt"));
-		String zeile = reader.readLine();
+		wayreader = new BufferedReader(new FileReader("Weg_Level1.txt"));
+		String zeile = wayreader.readLine();
 		while (zeile != null) {
 			String[] weg = zeile.split("/");
 			String x = weg[0];
@@ -223,13 +220,13 @@ public class Level1 implements MouseListener, MouseMotionListener {
 			int xPos = Integer.parseInt(x);
 			int yPos = Integer.parseInt(y);
 			way.add(new Position(xPos, yPos));
-			zeile = reader.readLine();
+			zeile = wayreader.readLine();
 		}
 	}
 
 	public static void readenemys() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("Enemys_Level1.txt"));
-		String line = reader.readLine();
+		enemyreader = new BufferedReader(new FileReader("Enemys_Level1.txt"));
+		String line = enemyreader.readLine();
 		String[] allenemys = line.split(";");
 		for (int i = 0; i < allenemys.length; i++) {
 			if (allenemys[i].equals("norm") == true) {
@@ -237,6 +234,13 @@ public class Level1 implements MouseListener, MouseMotionListener {
 			} else if (allenemys[i].equals("speed") == true) {
 				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY()));
 			}
+		}
+	}
+
+	public static void moveenemys() {
+		for (int i = 0; i < normenemys.size(); i++) {
+			NormalEnemy enemy = normenemys.get(i);
+			enemy.checkmove();
 		}
 	}
 }
