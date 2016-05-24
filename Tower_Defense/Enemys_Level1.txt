@@ -1,1 +1,1 @@
-norm
+norm;norm

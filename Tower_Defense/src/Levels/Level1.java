@@ -27,7 +27,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static double mouseposY = 0.0;
 
 	// Gegner
-	protected static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
+	public static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
 	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
 	protected static ArrayList<Integer> delList = new ArrayList<Integer>();
 	// Weg
@@ -151,18 +151,13 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		readenemys();
 		sp.repaint();
 		Thread.sleep(3000);
-		while(true){
+		while (true) {
 			moveenemys();
-			checkdelList();
-			Thread.sleep(5);
+			checkDelList();
+			Thread.sleep(1);
 		}
 	}
-
-	private static void checkdelList() {
-		// TODO Auto-generated method stub
-		
-	}
-
+ 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
@@ -247,10 +242,32 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	public static void moveenemys() {
 		for (int i = 0; i < normenemys.size(); i++) {
 			NormalEnemy enemy = normenemys.get(i);
-			enemy.checkmove("normen",i);
+			enemy.checkmove("normen", i);
+			normenemys.remove(i);
+			normenemys.add(i, enemy);
+			System.out.println(i);
 		}
 	}
-	public static void delEnemy(int enemyArrayPos){
+
+	public static void delEnemy(int enemyArrayPos) {
 		delList.add(enemyArrayPos);
 	}
+
+	private static void checkDelList() {
+		int nubToRem;
+		for (int i = 0; i < delList.size();) {
+			nubToRem=delList.get(0);
+			normenemys.remove(nubToRem);
+			normenemys.add(nubToRem, null);
+			delList.remove(0);
+		}
+		for(int i = 0; i < normenemys.size(); i++){
+			if(normenemys.get(i) == null){
+				normenemys.remove(i);
+				i--;
+			}
+		}
+	}
+	
+	
 }
