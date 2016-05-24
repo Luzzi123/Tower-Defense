@@ -29,6 +29,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	// Gegner
 	protected static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
 	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
+	protected static ArrayList<Integer> delList = new ArrayList<Integer>();
 	// Weg
 	public static ArrayList<Position> way = new ArrayList<Position>();
 	// Türme
@@ -152,8 +153,14 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		Thread.sleep(3000);
 		while(true){
 			moveenemys();
+			checkdelList();
 			Thread.sleep(5);
 		}
+	}
+
+	private static void checkdelList() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -240,7 +247,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	public static void moveenemys() {
 		for (int i = 0; i < normenemys.size(); i++) {
 			NormalEnemy enemy = normenemys.get(i);
-			enemy.checkmove();
+			enemy.checkmove("normen",i);
 		}
+	}
+	public static void delEnemy(int enemyArrayPos){
+		delList.add(enemyArrayPos);
 	}
 }

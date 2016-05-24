@@ -7,7 +7,7 @@ public abstract class EnemyALG {
 	private int hp;
 	private int defaultMoveCountdown;
 	private int moveCountdown;
-	private int wayarraypos = 0;
+	private int wayarraypos =0;
 	private int posx;
 	private int posy;
 
@@ -56,22 +56,22 @@ public abstract class EnemyALG {
 		this.defaultMoveCountdown = defaultMoveCountdown;
 	}
 	
-	public void checkmove() {
+	public void checkmove(String whichEnemy, int enemyArrayPos) {
 		if (moveCountdown <= 0) {
-			move();
+			move(whichEnemy,enemyArrayPos);
 		}
 		else{
 			moveCountdown--;
 		}
 	}
-	public void move() {
-		if (wayarraypos++ < Level1.way.size()) {
-			wayarraypos++;
+	public void move(String whichEnemy, int enemyArrayPos) {
+		if (wayarraypos+2 < Level1.way.size()) {
 			posx = Level1.way.get(wayarraypos).getX();
 			posy = Level1.way.get(wayarraypos).getY();
+			wayarraypos++;
 		}
-		else{
-		 
+		else {
+			Level1.delEnemy(enemyArrayPos);
 		}
 		if (wayarraypos > 0) {
 			setVisble(true);
