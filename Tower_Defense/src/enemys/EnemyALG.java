@@ -56,22 +56,22 @@ public abstract class EnemyALG {
 		this.defaultMoveCountdown = defaultMoveCountdown;
 	}
 	
-	public void checkmove(String whichEnemy, int enemyArrayPos) {
+	public void checkmove(int enemyArrayPos, String wichEnemy) {
 		if (moveCountdown <= 0) {
-			move(whichEnemy,enemyArrayPos);
+			move(enemyArrayPos, wichEnemy);
 		}
 		else{
 			moveCountdown--;
 		}
 	}
-	public void move(String whichEnemy, int enemyArrayPos) {
+	public void move(int enemyArrayPos, String wichEnemy) {
 		if (wayarraypos+2 < Level1.way.size()) {
 			posx = Level1.way.get(wayarraypos).getX();
 			posy = Level1.way.get(wayarraypos).getY();
 			wayarraypos++;
 		}
 		else {
-			Level1.delEnemy(enemyArrayPos);
+			Level1.delEnemy(enemyArrayPos, wichEnemy);
 		}
 		if (wayarraypos > 0) {
 			setVisble(true);

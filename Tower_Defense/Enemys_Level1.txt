@@ -1,1 +1,1 @@
-norm;norm
+norm;norm;speed;speed

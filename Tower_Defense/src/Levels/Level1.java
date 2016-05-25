@@ -29,7 +29,8 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	// Gegner
 	public static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
 	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
-	protected static ArrayList<Integer> delList = new ArrayList<Integer>();
+	protected static ArrayList<Integer> normdelList = new ArrayList<Integer>();
+	protected static ArrayList<Integer> speeddelList = new ArrayList<Integer>();
 	// Weg
 	public static ArrayList<Position> way = new ArrayList<Position>();
 	// Türme
@@ -153,11 +154,11 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		Thread.sleep(3000);
 		while (true) {
 			moveenemys();
-			checkDelList();
-			Thread.sleep(1);
+			checkNormDelList();
+			Thread.sleep(5);
 		}
 	}
- 
+
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
@@ -232,9 +233,9 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		String[] allenemys = line.split(";");
 		for (int i = 0; i < allenemys.length; i++) {
 			if (allenemys[i].equals("norm") == true) {
-				normenemys.add(new NormalEnemy(way.get(0).getX(), way.get(0).getY()));
+				normenemys.add(new NormalEnemy(way.get(0).getX(), way.get(0).getY(), 1500 * (i + 1)));
 			} else if (allenemys[i].equals("speed") == true) {
-				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY()));
+				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY(), 1500 * (i + 1)));
 			}
 		}
 	}
@@ -242,32 +243,56 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	public static void moveenemys() {
 		for (int i = 0; i < normenemys.size(); i++) {
 			NormalEnemy enemy = normenemys.get(i);
-			enemy.checkmove("normen", i);
+			enemy.checkmove(i, "norm");
 			normenemys.remove(i);
 			normenemys.add(i, enemy);
-			System.out.println(i);
+		}
+		for (int i = 0; i < speedenemy.size(); i++) {
+			SpeedEnemy enemy = speedenemy.get(i);
+			enemy.checkmove(i, "speed");
+			speedenemy.remove(i);
+			speedenemy.add(i, enemy);
 		}
 	}
 
-	public static void delEnemy(int enemyArrayPos) {
-		delList.add(enemyArrayPos);
+	public static void delEnemy(int enemyArrayPos, String wichEnemy) {
+		if (wichEnemy.equals("norm")) {
+			normdelList.add(enemyArrayPos);
+		} else {
+			speeddelList.add(enemyArrayPos);
+		}
 	}
 
-	private static void checkDelList() {
+	private static void checkNormDelList() {
 		int nubToRem;
-		for (int i = 0; i < delList.size();) {
-			nubToRem=delList.get(0);
-			normenemys.remove(nubToRem);
-			normenemys.add(nubToRem, null);
-			delList.remove(0);
+		if (normdelList.size() > 0) {
+			for (int i = 0; i < normdelList.size();) {
+				nubToRem = normdelList.get(0);
+				normenemys.remove(nubToRem);
+				normenemys.add(nubToRem, null);
+				normdelList.remove(0);
+			}
+			for (int i = 0; i < normenemys.size(); i++) {
+				if (normenemys.get(i) == null) {
+					normenemys.remove(i);
+					i--;
+				}
+			}
 		}
-		for(int i = 0; i < normenemys.size(); i++){
-			if(normenemys.get(i) == null){
-				normenemys.remove(i);
-				i--;
+		else if(speeddelList.size()>0){
+			for (int i = 0; i < speeddelList.size();) {
+				nubToRem = speeddelList.get(0);
+				speedenemy.remove(nubToRem);
+				speedenemy.add(nubToRem, null);
+				speeddelList.remove(0);
+			}
+			for (int i = 0; i < speedenemy.size(); i++) {
+				if (speedenemy.get(i) == null) {
+					speedenemy.remove(i);
+					i--;
+				}
 			}
 		}
 	}
-	
-	
+
 }
