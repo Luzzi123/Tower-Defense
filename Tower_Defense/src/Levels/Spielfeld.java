@@ -4,13 +4,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import javafx.scene.image.Image;
+
 public class Spielfeld extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	public Spielfeld(Level1 l) {
 		this.setPreferredSize(new Dimension(640, 480));
 	}
@@ -25,6 +26,7 @@ public class Spielfeld extends JPanel {
 		drawallSlowTow(g);
 		drawallFlameTow(g);
 		drawallHRTow(g);
+		drawBase(g);
 	}
 
 	private void drawWay(Graphics g) {
@@ -82,5 +84,9 @@ public class Spielfeld extends JPanel {
 		for(int i=0;i<Level1.speedenemy.size();i++)
 			if(Level1.speedenemy.get(i).isVisble())
 				g.drawOval(Level1.speedenemy.get(i).getPosx()-10, Level1.speedenemy.get(i).getPosy()-10, 20, 20);
+	}
+	
+	private void drawBase(Graphics g){
+		g.drawRoundRect(Level1.way.get(Level1.way.size()-1).getX()- 16, Level1.way.get(Level1.way.size()-1).getY()-50, 40, 100, 10, 10);
 	}
 }
