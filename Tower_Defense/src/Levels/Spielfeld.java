@@ -36,7 +36,7 @@ public class Spielfeld extends JPanel {
 	}
 
 	private void drawselectedTow(Graphics g) {
-		if (Level1.mouseposX >= 15 && Level1.mouseposY >= 15 && Level1.mouseposX <= 624 && Level1.mouseposY <= 474) {
+		if (Level1.mouseposX >= 15 && Level1.mouseposY >= 15 && Level1.mouseposX <= 624 && Level1.mouseposY <= 464) {
 			if (Level1.nt.isSelected() == true) {
 				g.drawRect((int) Level1.mouseposX - 15, (int) Level1.mouseposY - 15, 30, 30);
 			} else if (Level1.hrt.isSelected() == true) {
@@ -87,6 +87,7 @@ public class Spielfeld extends JPanel {
 	}
 	
 	private void drawBase(Graphics g){
-		g.drawRoundRect(Level1.way.get(Level1.way.size()-1).getX()- 16, Level1.way.get(Level1.way.size()-1).getY()-50, 40, 100, 10, 10);
+		if(Level1.way.size()>0)
+			g.drawRoundRect(Level1.way.get(Level1.way.size()-1).getX()- 16, Level1.way.get(Level1.way.size()-1).getY()-50, 100, 100, 10, 10);
 	}
 }

@@ -7,25 +7,15 @@ public abstract class TowerALG implements TowerInterface{
 	private int lvl=1;
 	private double positionx;
 	private double positiony;
-	
-	
-		
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "DMG = " + dmg + ", RangePXL = " + rangePXL + ", Shotdelay = " + shotdelay + ", Level = " + lvl
-				+ ", PositionX = " + positionx + ", PositionY = " + positiony;
-	}
+	private int price;
 
-	public TowerALG(int dmg, int rangePXL, int shotdelay, double positionx, double positiony) {
+	public TowerALG(int dmg, int rangePXL, int shotdelay, double positionx, double positiony, int price) {
 		super();
-		this.dmg = dmg;
-		this.rangePXL = rangePXL;
-		this.shotdelay = shotdelay;
-		this.positionx = positionx;
-		this.positiony = positiony;
+		setDmg(dmg);
+		setRangePXL(rangePXL);
+		setShotdelay(shotdelay);
+		setPositionx(positionx);
+		setPositiony(positiony);
 	}
 	
 	public int getDmg() {

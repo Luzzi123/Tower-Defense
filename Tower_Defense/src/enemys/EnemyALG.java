@@ -73,11 +73,10 @@ public abstract class EnemyALG {
 		else {
 			Level1.delEnemy(enemyArrayPos, wichEnemy);
 		}
-		if (wayarraypos > 0) {
+		if (wayarraypos == 1) {
 			setVisble(true);
 		}
 		Level1.sp.repaint();
 		moveCountdown = defaultMoveCountdown;
 	}
-
 }

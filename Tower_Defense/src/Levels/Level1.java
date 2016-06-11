@@ -26,6 +26,12 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static double mouseposX = 0.0;
 	protected static double mouseposY = 0.0;
 
+	// WinorLose, Started
+	protected static boolean started = false;
+	protected static boolean WinorLose;
+	// Basis
+	protected static int baseHP = 10;
+	protected static int money = 950;
 	// Gegner
 	public static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
 	protected static ArrayList<SpeedEnemy> speedenemy = new ArrayList<SpeedEnemy>();
@@ -39,10 +45,10 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
 	protected static ArrayList<HighRangeTower> allHighRangeTower = new ArrayList<HighRangeTower>();
 	// Buttons, etc.
-	static JToggleButton nt = new JToggleButton("<html><center>Normal<br>Tower</center></html>", false);
-	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower</center></html>", false);
-	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower</center></html>", false);
-	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower</center></html>", false);
+	static JToggleButton nt = new JToggleButton("<html><center>Normal<br>Tower<br>(50G)</center></html>", false);
+	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower<br>(150G)</center></html>", false);
+	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower<br>(500G)</center></html>", false);
+	static JToggleButton ft = new JToggleButton("<html><center>Flame<br>Tower<br>(250G)</center></html>", false);
 	protected static JLabel lb = new JLabel();
 	public static Spielfeld sp = new Spielfeld(null);
 	private static BufferedReader wayreader;
@@ -123,13 +129,13 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		c.gridx = 2;
 		c.gridy = 0;
 		hrt.addActionListener(actionHRT);
-		jp.add(hrt, c);
+		jp.add(ft, c);
 		hrt.setPreferredSize(new Dimension(110, 75));
 
 		c.gridx = 3;
 		c.gridy = 0;
 		ft.addActionListener(actionFT);
-		jp.add(ft, c);
+		jp.add(hrt, c);
 		ft.setPreferredSize(new Dimension(90, 75));
 
 		sp.addMouseListener(this);
@@ -151,30 +157,51 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		readway();
 		readenemys();
 		sp.repaint();
-		Thread.sleep(3000);
+		lb.setText("BaseHP: " + baseHP + "/ Money: " + money);
+		checkEnoughtMoney();
 		while (true) {
-			moveenemys();
-			checkNormDelList();
+			if (started == true) {
+				checkEnoughtMoney();
+				// Geschwindigkeit der Gegner (default Move Countdown) muss
+				// angepasst werden.
+				moveenemys();
+				checkDelList();
+				WinorLose = checkWinorLose();
+				if (WinorLose == true) {
+					nt.setEnabled(false);
+					st.setEnabled(false);
+					hrt.setEnabled(false);
+					ft.setEnabled(false);
+					break;
+				}
+				lb.setText("BaseHP: " + baseHP + "/ Money: " + money);
+			}
 			Thread.sleep(5);
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if (nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true) {
+		if ((nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true)
+				&& WinorLose == false) {
 			if (nt.isSelected() == true) {
 				allNormTower.add(new NormalTower(arg0.getX() - 15, arg0.getY() - 15));
+				money -= allNormTower.get(allNormTower.size() - 1).getPrice();
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
 				allSlowTower.add(new SlowTower(arg0.getX() - 15, arg0.getY() - 15));
+				money -= allSlowTower.get(allSlowTower.size()-1).getPrice();
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
 				allHighRangeTower.add(new HighRangeTower(arg0.getX() - 15, arg0.getY() - 15));
+				money -= allHighRangeTower.get(allHighRangeTower.size()-1).getPrice();
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
 				allFlameTower.add(new FlameTower(arg0.getX() - 15, arg0.getY() - 15));
+				money -= allFlameTower.get(allFlameTower.size()-1).getPrice();
 				ft.setSelected(false);
 			}
+			started = true;
 			lb.setText("");
 		}
 	}
@@ -263,36 +290,57 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	private static void checkNormDelList() {
+	private static void checkDelList() {
 		int nubToRem;
 		if (normdelList.size() > 0) {
 			for (int i = 0; i < normdelList.size();) {
 				nubToRem = normdelList.get(0);
 				normenemys.remove(nubToRem);
-				normenemys.add(nubToRem, null);
 				normdelList.remove(0);
+				baseHP--;
 			}
-			for (int i = 0; i < normenemys.size(); i++) {
-				if (normenemys.get(i) == null) {
-					normenemys.remove(i);
-					i--;
-				}
-			}
-		}
-		else if(speeddelList.size()>0){
+		} else if (speeddelList.size() > 0) {
 			for (int i = 0; i < speeddelList.size();) {
 				nubToRem = speeddelList.get(0);
 				speedenemy.remove(nubToRem);
-				speedenemy.add(nubToRem, null);
 				speeddelList.remove(0);
-			}
-			for (int i = 0; i < speedenemy.size(); i++) {
-				if (speedenemy.get(i) == null) {
-					speedenemy.remove(i);
-					i--;
-				}
+				baseHP--;
 			}
 		}
+	}
+
+	private static boolean checkWinorLose() {
+		if (normenemys.size() == 0 && speedenemy.size() == 0 && baseHP > 0) {
+			// Wird noch durch eine Sieges-Fenster Ersetzt. (Sieges-Fenster ist
+			// Über dem
+			// Spielfeld, allerdings erst sichtbar, es keine Gegner gibt.)
+			lb.setText("Du hast gewonnen. Es gibt keine Gegner mehr.");
+			return true;
+		} else if (baseHP <= 0) {
+			lb.setText("Du hast verloren. Du hast zu viele Gegner in die Basis gelassen.");
+			return true;
+		} else
+			return false;
+
+	}
+
+	private static void checkEnoughtMoney() {
+		if (money < 50)
+			nt.setEnabled(false);
+		else
+			nt.setEnabled(true);
+		if (money < 150)
+			st.setEnabled(false);
+		else
+			st.setEnabled(true);
+		if (money < 250)
+			ft.setEnabled(false);
+		else
+			ft.setEnabled(true);
+		if (money < 500)
+			hrt.setEnabled(false);
+		else
+			hrt.setEnabled(true);
 	}
 
 }

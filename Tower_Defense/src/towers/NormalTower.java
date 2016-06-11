@@ -13,11 +13,7 @@ public class NormalTower extends TowerALG{
 	}
 
 	public NormalTower(double positionx, double positiony) {
-		super(15,100,500, positionx, positiony);
-	}
-	
-	public NormalTower(int dmg,int range,int shotdelay, double positionx, double positiony){
-		super(dmg,range,shotdelay, positionx, positiony);
+		super(15,100,500, positionx, positiony,50);
 	}
 
 	@Override
@@ -31,6 +27,10 @@ public class NormalTower extends TowerALG{
 		super.setDmg(50);
 		super.setRangePXL(200);
 		super.setShotdelay(300);
+	}
+	
+	public int getPrice(){
+		return 50;
 	}
 	
 }
