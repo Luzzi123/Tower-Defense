@@ -8,6 +8,7 @@ public abstract class TowerALG implements TowerInterface{
 	private double positionx;
 	private double positiony;
 	private int price;
+	private int whichpic=1;
 
 	public TowerALG(int dmg, int rangePXL, int shotdelay, double positionx, double positiony, int price) {
 		super();
@@ -50,5 +51,16 @@ public abstract class TowerALG implements TowerInterface{
 	}
 	protected void setShotdelay(int shotdelay) {
 		this.shotdelay = shotdelay;
+	}
+	public int getPrice(){
+		return price;
+	}
+
+	public int getWhichpic() {
+		return whichpic;
+	}
+
+	public void setWhichpic(int whichpic) {
+		this.whichpic = whichpic;
 	}
 }

@@ -2,7 +2,7 @@ package enemys;
 
 import Levels.*;
 
-public abstract class EnemyALG {
+public abstract class EnemyALG implements EnemyInterface {
 	private boolean visble = false;
 	private int hp;
 	private int defaultMoveCountdown;
@@ -10,6 +10,9 @@ public abstract class EnemyALG {
 	private int wayarraypos =0;
 	private int posx;
 	private int posy;
+	private int wichpic=1;
+	private int wichpiccountdown=30;
+	private int wichpiccountdowndefault=30;
 
 	public EnemyALG(int hp, int posx, int posy, int firstMoveCountdown, int defaCountDown) {
 		setHp(hp);
@@ -78,5 +81,20 @@ public abstract class EnemyALG {
 		}
 		Level1.sp.repaint();
 		moveCountdown = defaultMoveCountdown;
+	}
+	public int getwichpic(){
+		return wichpic;
+	}
+	public void setwichpic(int wichpic){
+		this.wichpic= wichpic;
+	}
+	public int getwichpiccountdown(){
+		return wichpiccountdown;
+	}
+	public void settodefault(){
+		wichpiccountdown=wichpiccountdowndefault;
+	}
+	public void setwichpiccountdown(int wichpiccountdown){
+		this.wichpiccountdown=wichpiccountdown;
 	}
 }
