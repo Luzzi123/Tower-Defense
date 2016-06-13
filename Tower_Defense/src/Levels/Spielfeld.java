@@ -27,7 +27,7 @@ public class Spielfeld extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, 640, 480);
-		// drawField(g);
+		 drawField(g);
 		drawWay(g);
 		drawEnemy(g);
 		drawselectedTow(g);
@@ -38,9 +38,9 @@ public class Spielfeld extends JPanel {
 		drawBase(g);
 	}
 
-	// private void drawField(Graphics g) {
-	// g.drawImage(field, 0, 0, null);
-	// }
+	 private void drawField(Graphics g) {
+	 g.drawImage(field, 0, 0,640,480, null);
+	 }
 
 	private void drawWay(Graphics g) {
 		for (int i = 5; i < Level1.way.size(); i++) {

@@ -241,7 +241,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	}
 
 	public static void readway() throws IOException {
-		wayreader = new BufferedReader(new FileReader("Weg_Level1.txt"));
+		wayreader = new BufferedReader(new FileReader("Enemy,Way/Weg_Level1.txt"));
 		String zeile = wayreader.readLine();
 		while (zeile != null) {
 			String[] weg = zeile.split("/");
@@ -255,14 +255,14 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	}
 
 	public static void readenemys() throws IOException {
-		enemyreader = new BufferedReader(new FileReader("Enemys_Level1.txt"));
+		enemyreader = new BufferedReader(new FileReader("Enemy,Way/Enemys_Level1.txt"));
 		String line = enemyreader.readLine();
 		String[] allenemys = line.split(";");
 		for (int i = 0; i < allenemys.length; i++) {
 			if (allenemys[i].equals("norm") == true) {
-				normenemys.add(new NormalEnemy(way.get(0).getX(), way.get(0).getY(), 1500 * (i + 1)));
+				normenemys.add(new NormalEnemy(way.get(0).getX(), way.get(0).getY(), 500 * (i + 1)));
 			} else if (allenemys[i].equals("speed") == true) {
-				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY(), 1500 * (i + 1)));
+				speedenemy.add(new SpeedEnemy(way.get(0).getX(), way.get(0).getY(), 500 * (i + 1)));
 			}
 		}
 	}
