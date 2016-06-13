@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import Levels.*;
 
 public class Menu {
+	private Image icon= new ImageIcon("Game Icon.png").getImage();
 
 	protected static MouseMotionListener listener = new MouseMotionListener() {
 
@@ -36,7 +37,7 @@ public class Menu {
 	Image img= new ImageIcon("Start_Way.png").getImage();
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		new Menu(args);
+		new Menu();
 		while(true){
 			if(ovap.but.isSelected()==true){
 				frame.dispose();
@@ -48,9 +49,10 @@ public class Menu {
 		}
 	}
 
-	public Menu(String[] args) {
+	public Menu() {
 		//Modelliere Frame
 		frame.setBounds(650,210,646, 609);
+		frame.setIconImage(icon);
 		frame.setLayout(new BorderLayout());
 		frame.setResizable(false);
 		// Modelliere pan

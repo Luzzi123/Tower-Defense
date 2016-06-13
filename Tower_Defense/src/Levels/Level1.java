@@ -3,8 +3,10 @@ package Levels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -14,6 +16,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,6 +49,8 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static ArrayList<FlameTower> allFlameTower = new ArrayList<FlameTower>();
 	protected static ArrayList<HighRangeTower> allHighRangeTower = new ArrayList<HighRangeTower>();
 	// Buttons, etc.
+	protected static JLabel statslb= new JLabel();
+	private Image icon= new ImageIcon("Game Icon.png").getImage();
 	static JToggleButton nt = new JToggleButton("<html><center>Normal<br>Tower<br>(50G)</center></html>", false);
 	static JToggleButton st = new JToggleButton("<html><center>Slow<br>Tower<br>(150G)</center></html>", false);
 	static JToggleButton hrt = new JToggleButton("<html><center>High-Rage<br>Tower<br>(500G)</center></html>", false);
@@ -57,13 +63,15 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	public Level1() {
 		// JFrame bearbeitung
 		JFrame l1 = new JFrame("Level 1");
+		l1.setIconImage(icon);
 		l1.setLayout(new BorderLayout());
 		l1.setLocationRelativeTo(null);
 		l1.setBounds(650, 210, 0, 0);
 
 		JPanel jp = new JPanel();
 		jp.setLayout(new GridBagLayout());
-		jp.setBackground(Color.LIGHT_GRAY);
+		jp.setBackground(Color.WHITE);
+		lb.setBackground(Color.WHITE);
 
 		// Define ActionListener
 		ActionListener actionNT = new ActionListener() {
@@ -119,24 +127,32 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		nt.addActionListener(actionNT);
 		jp.add(nt, c);
 		nt.setPreferredSize(new Dimension(90, 75));
+		nt.setIcon(new ImageIcon("Tower/TowerButton/NormalTowerBut.png"));
 
 		c.gridx = 1;
 		c.gridy = 0;
 		st.addActionListener(actionST);
 		jp.add(st, c);
 		st.setPreferredSize(new Dimension(90, 75));
+		st.setIcon(new ImageIcon("Tower/TowerButton/SlowTowerBut.png"));
 
 		c.gridx = 2;
 		c.gridy = 0;
 		hrt.addActionListener(actionHRT);
 		jp.add(ft, c);
 		hrt.setPreferredSize(new Dimension(110, 75));
+		hrt.setIcon(new ImageIcon("Tower/TowerButton/HighRangeTowerBut.png"));
 
 		c.gridx = 3;
 		c.gridy = 0;
 		ft.addActionListener(actionFT);
 		jp.add(hrt, c);
 		ft.setPreferredSize(new Dimension(90, 75));
+		ft.setIcon(new ImageIcon("Tower/TowerButton/FlameTowerBut.png"));
+		
+		c.gridx=4;
+		jp.add(statslb, c);
+		statslb.setFont(new Font("Courier New", Font.ITALIC, 12));
 
 		sp.addMouseListener(this);
 		sp.addMouseMotionListener(this);
@@ -157,13 +173,11 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		readway();
 		readenemys();
 		sp.repaint();
-		lb.setText("BaseHP: " + baseHP + "/ Money: " + money);
+		statslb.setText("<html><p>Leben: "+baseHP+"</p><p>Gold: "+money+"</p></html>");
 		checkEnoughtMoney();
 		while (true) {
 			if (started == true) {
 				checkEnoughtMoney();
-				// Geschwindigkeit der Gegner (default Move Countdown) muss
-				// angepasst werden.
 				moveenemys();
 				checkDelList();
 				WinorLose = checkWinorLose();
@@ -174,7 +188,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					ft.setEnabled(false);
 					break;
 				}
-				lb.setText("BaseHP: " + baseHP + "/ Money: " + money);
+				statslb.setText("<html><p>Leben: "+baseHP+"</p><p>Gold: "+money+"</p></html>");
 			}
 			Thread.sleep(5);
 		}
