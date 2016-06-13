@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-import javafx.scene.image.Image;
-
 public class Spielfeld extends JPanel {
 
 	/**
