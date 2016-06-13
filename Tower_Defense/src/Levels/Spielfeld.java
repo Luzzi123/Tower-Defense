@@ -19,6 +19,11 @@ public class Spielfeld extends JPanel {
 	private Image normen1 = new ImageIcon("Skelet1.png").getImage();
 	private Image normen2 = new ImageIcon("Skelet2.png").getImage();
 	private Image field = new ImageIcon("Field.png").getImage();
+	private Image normT = new ImageIcon("Tower/Normal Tower.png").getImage();
+	private Image slowT = new ImageIcon("Tower/Slow Tower.png").getImage();
+	private Image fireT = new ImageIcon("Tower/Flame Tower.png").getImage();
+	private Image hrT = new ImageIcon("Tower/HIGHRANGE Tower.png").getImage();
+	private Image base = new ImageIcon("Base/Base.png").getImage();
 
 	public Spielfeld(Level1 l) {
 		this.setPreferredSize(new Dimension(640, 480));
@@ -27,20 +32,20 @@ public class Spielfeld extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.clearRect(0, 0, 640, 480);
-		 drawField(g);
+		drawField(g);
 		drawWay(g);
-		drawEnemy(g);
 		drawselectedTow(g);
 		drawallNormTow(g);
 		drawallSlowTow(g);
 		drawallFlameTow(g);
 		drawallHRTow(g);
 		drawBase(g);
+		drawEnemy(g);
 	}
 
-	 private void drawField(Graphics g) {
-	 g.drawImage(field, 0, 0,640,480, null);
-	 }
+	private void drawField(Graphics g) {
+		g.drawImage(field, 0, 0, 640, 480, null);
+	}
 
 	private void drawWay(Graphics g) {
 		for (int i = 5; i < Level1.way.size(); i++) {
@@ -51,42 +56,42 @@ public class Spielfeld extends JPanel {
 	private void drawselectedTow(Graphics g) {
 		if (Level1.mouseposX >= 15 && Level1.mouseposY >= 15 && Level1.mouseposX <= 624 && Level1.mouseposY <= 464) {
 			if (Level1.nt.isSelected() == true) {
-				g.drawRect((int) Level1.mouseposX - 15, (int) Level1.mouseposY - 15, 30, 30);
+				g.drawImage(normT, (int) Level1.mouseposX - 20, (int) Level1.mouseposY - 14, 40, 29, null);
 			} else if (Level1.hrt.isSelected() == true) {
-				g.drawRect((int) Level1.mouseposX - 15, (int) Level1.mouseposY - 15, 30, 30);
+				g.drawImage(hrT, (int) Level1.mouseposX - 20, (int) Level1.mouseposY - 20, 40, 40, null);
 			} else if (Level1.ft.isSelected() == true) {
-				g.drawRect((int) Level1.mouseposX - 15, (int) Level1.mouseposY - 15, 30, 30);
+				g.drawImage(fireT, (int) Level1.mouseposX - 20, (int) Level1.mouseposY - 20, 40, 40, null);
 			} else if (Level1.st.isSelected() == true) {
-				g.drawRect((int) Level1.mouseposX - 15, (int) Level1.mouseposY - 15, 30, 30);
+				g.drawImage(slowT, (int) Level1.mouseposX - 20, (int) Level1.mouseposY - 16, 40, 32, null);
 			}
 		}
 	}
 
 	private void drawallHRTow(Graphics g) {
 		for (int i = 0; i < Level1.allHighRangeTower.size(); i++) {
-			g.drawRect((int) Level1.allHighRangeTower.get(i).getPositionx(),
-					(int) Level1.allHighRangeTower.get(i).getPositiony(), 30, 30);
+			g.drawImage(hrT, (int) Level1.allHighRangeTower.get(i).getPositionx(),
+					(int) Level1.allHighRangeTower.get(i).getPositiony(), 40, 40, null);
 		}
 	}
 
 	private void drawallFlameTow(Graphics g) {
 		for (int i = 0; i < Level1.allFlameTower.size(); i++) {
-			g.drawRect((int) Level1.allFlameTower.get(i).getPositionx(),
-					(int) Level1.allFlameTower.get(i).getPositiony(), 30, 30);
+			g.drawImage(fireT, (int) Level1.allFlameTower.get(i).getPositionx(),
+					(int) Level1.allFlameTower.get(i).getPositiony(), 40, 40, null);
 		}
 	}
 
 	private void drawallSlowTow(Graphics g) {
 		for (int i = 0; i < Level1.allSlowTower.size(); i++) {
-			g.drawRect((int) Level1.allSlowTower.get(i).getPositionx(), (int) Level1.allSlowTower.get(i).getPositiony(),
-					30, 30);
+			g.drawImage(slowT, (int) Level1.allSlowTower.get(i).getPositionx(),
+					(int) Level1.allSlowTower.get(i).getPositiony(), 40, 32, null);
 		}
 	}
 
 	private void drawallNormTow(Graphics g) {
 		for (int i = 0; i < Level1.allNormTower.size(); i++) {
-			g.drawRect((int) Level1.allNormTower.get(i).getPositionx(), (int) Level1.allNormTower.get(i).getPositiony(),
-					30, 30);
+			g.drawImage(normT, (int) Level1.allNormTower.get(i).getPositionx(),
+					(int) Level1.allNormTower.get(i).getPositiony(), 40, 29, null);
 		}
 	}
 
@@ -147,7 +152,7 @@ public class Spielfeld extends JPanel {
 
 	private void drawBase(Graphics g) {
 		if (Level1.way.size() > 0)
-			g.drawRoundRect(Level1.way.get(Level1.way.size() - 1).getX() - 16,
-					Level1.way.get(Level1.way.size() - 1).getY() - 50, 100, 100, 10, 10);
+			g.drawImage(base, Level1.way.get(Level1.way.size() - 1).getX() - 47,
+					Level1.way.get(Level1.way.size() - 1).getY() - 100, 94, 100, null);
 	}
 }

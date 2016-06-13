@@ -185,19 +185,19 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		if ((nt.isSelected() == true || st.isSelected() == true || hrt.isSelected() == true || ft.isSelected() == true)
 				&& WinorLose == false) {
 			if (nt.isSelected() == true) {
-				allNormTower.add(new NormalTower(arg0.getX() - 15, arg0.getY() - 15));
+				allNormTower.add(new NormalTower(arg0.getX() - 20, arg0.getY() - 14));
 				money -= allNormTower.get(allNormTower.size() - 1).getPrice();
 				nt.setSelected(false);
 			} else if (st.isSelected() == true) {
-				allSlowTower.add(new SlowTower(arg0.getX() - 15, arg0.getY() - 15));
+				allSlowTower.add(new SlowTower(arg0.getX() - 20, arg0.getY() - 16));
 				money -= allSlowTower.get(allSlowTower.size()-1).getPrice();
 				st.setSelected(false);
 			} else if (hrt.isSelected() == true) {
-				allHighRangeTower.add(new HighRangeTower(arg0.getX() - 15, arg0.getY() - 15));
+				allHighRangeTower.add(new HighRangeTower(arg0.getX() - 20, arg0.getY() - 20));
 				money -= allHighRangeTower.get(allHighRangeTower.size()-1).getPrice();
 				hrt.setSelected(false);
 			} else if (ft.isSelected() == true) {
-				allFlameTower.add(new FlameTower(arg0.getX() - 15, arg0.getY() - 15));
+				allFlameTower.add(new FlameTower(arg0.getX() - 20, arg0.getY() - 20));
 				money -= allFlameTower.get(allFlameTower.size()-1).getPrice();
 				ft.setSelected(false);
 			}
