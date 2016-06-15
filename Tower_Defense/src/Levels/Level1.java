@@ -152,7 +152,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		
 		c.gridx=4;
 		jp.add(statslb, c);
-		statslb.setFont(new Font("Courier New", Font.ITALIC, 12));
+		statslb.setFont(new Font("Courier New", Font.ITALIC, 16));
 
 		sp.addMouseListener(this);
 		sp.addMouseMotionListener(this);
@@ -181,6 +181,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 				moveenemys();
 				checkDelList();
 				WinorLose = checkWinorLose();
+				statslb.setText("<html><p>Leben: "+baseHP+"</p><p>Gold: "+money+"</p></html>");
 				if (WinorLose == true) {
 					nt.setEnabled(false);
 					st.setEnabled(false);
@@ -188,7 +189,6 @@ public class Level1 implements MouseListener, MouseMotionListener {
 					ft.setEnabled(false);
 					break;
 				}
-				statslb.setText("<html><p>Leben: "+baseHP+"</p><p>Gold: "+money+"</p></html>");
 			}
 			Thread.sleep(5);
 		}

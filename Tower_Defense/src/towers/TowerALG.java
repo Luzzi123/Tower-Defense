@@ -1,5 +1,6 @@
 package towers;
 
+// Stats individualisieren!
 public abstract class TowerALG implements TowerInterface{
 	private int dmg;
 	private int rangePXL;
