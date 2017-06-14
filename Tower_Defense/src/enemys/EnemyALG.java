@@ -72,6 +72,7 @@ public abstract class EnemyALG implements EnemyInterface {
 			posx = Level1.way.get(wayarraypos).getX();
 			posy = Level1.way.get(wayarraypos).getY();
 			wayarraypos++;
+			setwichpiccountdown(getwichpiccountdown()-1);
 		}
 		else {
 			Level1.delEnemy(enemyArrayPos, wichEnemy);

@@ -1,8 +1,15 @@
 package Levels;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -30,17 +37,17 @@ public class Spielfeld extends JPanel {
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
-		g.clearRect(0, 0, 640, 480);
-		drawField(g);
-		drawWay(g);
-		drawselectedTow(g);
-		drawallNormTow(g);
-		drawallSlowTow(g);
-		drawallFlameTow(g);
-		drawallHRTow(g);
-		drawBase(g);
-		drawEnemy(g);
+	protected void paintComponent(Graphics g) {		
+			g.clearRect(0, 0, this.getWidth(), this.getHeight());
+			drawField(g);
+			drawWay(g);
+			drawselectedTow(g);
+			drawallNormTow(g);
+			drawallSlowTow(g);
+			drawallFlameTow(g);
+			drawallHRTow(g);
+			drawBase(g);
+			drawEnemy(g);
 	}
 
 	private void drawField(Graphics g) {
@@ -100,14 +107,13 @@ public class Spielfeld extends JPanel {
 		for (int i = 0; i < Level1.normenemys.size(); i++) {
 			if (Level1.normenemys.get(i).isVisble() == true) {
 				if (Level1.normenemys.get(i).getWichpic() == 1 && Level1.normenemys.get(i).getwichpiccountdown() <= 0) {
-					g.drawImage(normen1, Level1.normenemys.get(i).getPosx() - 20,
-							Level1.normenemys.get(i).getPosy() - 66, 40, 66, null);
+					g.drawImage(normen1, Level1.normenemys.get(i).getPosx() - 20, Level1.normenemys.get(i).getPosy() - 66, 40, 66, null);
 					Level1.normenemys.get(i).setWichpic(2);
 					Level1.normenemys.get(i).wichpiccoutdowntodefault();
-				} else if (Level1.normenemys.get(i).getWichpic() == 1) {
+				}
+				else if (Level1.normenemys.get(i).getWichpic() == 1) {
 					g.drawImage(normen1, Level1.normenemys.get(i).getPosx() - 20,
 							Level1.normenemys.get(i).getPosy() - 66, 40, 66, null);
-					Level1.normenemys.get(i).setwichpiccountdown(Level1.normenemys.get(i).getwichpiccountdown() - 1);
 				}
 
 				if (Level1.normenemys.get(i).getWichpic() == 2 && Level1.normenemys.get(i).getwichpiccountdown() <= 0) {
@@ -118,7 +124,6 @@ public class Spielfeld extends JPanel {
 				} else if (Level1.normenemys.get(i).getWichpic() == 2) {
 					g.drawImage(normen2, Level1.normenemys.get(i).getPosx() - 20,
 							Level1.normenemys.get(i).getPosy() - 62, 40, 62, null);
-					Level1.normenemys.get(i).setwichpiccountdown(Level1.normenemys.get(i).getwichpiccountdown() - 1);
 				}
 			}
 		}
@@ -133,7 +138,6 @@ public class Spielfeld extends JPanel {
 				} else if (Level1.speedenemy.get(i).getWichpic() == 1) {
 					g.drawImage(speeden1, Level1.speedenemy.get(i).getPosx() - 20,
 							Level1.speedenemy.get(i).getPosy() - 66, 40, 66, null);
-					Level1.speedenemy.get(i).setwichpiccountdown(Level1.speedenemy.get(i).getwichpiccountdown() - 1);
 				}
 
 				if (Level1.speedenemy.get(i).getWichpic() == 2 && Level1.speedenemy.get(i).getwichpiccountdown() <= 0) {
@@ -144,7 +148,6 @@ public class Spielfeld extends JPanel {
 				} else if (Level1.speedenemy.get(i).getWichpic() == 2) {
 					g.drawImage(speeden2, Level1.speedenemy.get(i).getPosx() - 20,
 							Level1.speedenemy.get(i).getPosy() - 62, 40, 62, null);
-					Level1.speedenemy.get(i).setwichpiccountdown(Level1.speedenemy.get(i).getwichpiccountdown() - 1);
 				}
 			}
 

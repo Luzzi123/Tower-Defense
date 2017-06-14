@@ -1,1 +1,1 @@
-speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;
+norm;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;speed;

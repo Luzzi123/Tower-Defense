@@ -34,7 +34,7 @@ public class Level1 implements MouseListener, MouseMotionListener {
 	protected static boolean started = false;
 	protected static boolean WinorLose;
 	// Basis
-	protected static int baseHP = 10;
+	protected static int baseHP = 1;
 	protected static int money = 950;
 	// Gegner
 	public static ArrayList<NormalEnemy> normenemys = new ArrayList<NormalEnemy>();
@@ -180,9 +180,8 @@ public class Level1 implements MouseListener, MouseMotionListener {
 				checkEnoughtMoney();
 				moveenemys();
 				checkDelList();
-				WinorLose = checkWinorLose();
 				statslb.setText("<html><p>Leben: "+baseHP+"</p><p>Gold: "+money+"</p></html>");
-				if (WinorLose == true) {
+				if (checkWinorLose() == true) {
 					nt.setEnabled(false);
 					st.setEnabled(false);
 					hrt.setEnabled(false);
@@ -323,18 +322,21 @@ public class Level1 implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	private static boolean checkWinorLose() {
+	public static boolean checkWinorLose() {
 		if (normenemys.size() == 0 && speedenemy.size() == 0 && baseHP > 0) {
 			// Wird noch durch eine Sieges-Fenster Ersetzt. (Sieges-Fenster ist
 			// Über dem
 			// Spielfeld, allerdings erst sichtbar, es keine Gegner gibt.)
 			lb.setText("Du hast gewonnen. Es gibt keine Gegner mehr.");
+			sp.repaint();
 			return true;
 		} else if (baseHP <= 0) {
 			lb.setText("Du hast verloren. Du hast zu viele Gegner in die Basis gelassen.");
+			sp.repaint();
 			return true;
-		} else
+		} else{
 			return false;
+		}
 
 	}
 
